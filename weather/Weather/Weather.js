@@ -14,9 +14,10 @@ export class Weather {
             .then(data => {
                 for (let numberDay = 0; numberDay < this.countDays; numberDay++){
                     const numberDays = data.daily[numberDay]
-                    const day = new Day(new Date(numberDays.dt * 1000),
-                        Math.round((numberDays.temp.max + numberDays.temp.min) / 2 - 273),
-                        numberDays.weather[0].icon)
+                    const day = new Day( // создание шаблона одного из дня
+                        new Date(numberDays.dt * 1000), // текущий день
+                        Math.round((numberDays.temp.max + numberDays.temp.min) / 2 - 273), // вычисление средней температуры (по результатам видно, что средняя температура отличается от реальной на +-2 градуса)
+                        numberDays.weather[0].icon) // id иконки погоды
                     row.insertAdjacentHTML('beforeend', day.html())
                 }
             })
